@@ -69,9 +69,15 @@ def main():
         if st.checkbox("Volcano included in the data"):
             for n in range(len(volcano_name)):
                 st.write(f"{n+1}: {volcano_name[n]}")
-        if st.checkbox("Check 10 Random data?"):
+        if st.checkbox("Check Random data?"):
             df = pd.DataFrame(data)
-            st.table(df.sample(10))
+            random_num = st.slider(label='How many data you want to see?',
+                    min_value=0,
+                    max_value=len(data),
+                    value=10,
+                    )
+            st.write(f'Selected: {random_num}')
+            st.table(df.sample(random_num))
     elif selector=="Data by Country":
         st.write(time)
         st.title("Data by Country")
