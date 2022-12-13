@@ -11,6 +11,7 @@ import csv
 import pandas as pd
 import matplotlib.pyplot as plt
 import streamlit as st
+import datetime
 
 
 def read_Vol(filename):
@@ -43,12 +44,15 @@ def main():
             primary_volcano_type.append(data[i]["Primary Volcano Type"])
     sort = ["ascending","descending"]
 
+    time = datetime.datetime.now()
+
 
 
     st.set_page_config(layout="wide")
     pagelist = ["Home","Data by Country","Data by Country and Volcano Type","Charts","Maps & Scatter Plot of Volcanoes"]
     selector=st.sidebar.selectbox( "Select Page",pagelist)
     if selector=="Home":
+        st.write(time)
         st.title("Volcano Eruptions")
         st.markdown("![Alt Text](https://media.tenor.com/uIPn_roMlvcAAAAC/fortnite-volcano-eruption-fortnite-volcano.gif)")
         st.title("Introduction")
@@ -69,6 +73,7 @@ def main():
             df = pd.DataFrame(data)
             st.table(df.sample(10))
     elif selector=="Data by Country":
+        st.write(time)
         st.title("Data by Country")
         choose_country = st.selectbox('Choose a country to look at a data',country)
         sort_data = st.selectbox('Do you want to sort data in ascending order or descending order by Volcano Name???',sort)
@@ -78,6 +83,7 @@ def main():
         else:
             st.table(df[(df["Country"] ==choose_country)].sort_values("Volcano Name",ascending=False))
     elif selector=="Data by Country and Volcano Type":
+        st.write(time)
         st.title("Data by Country")
         choose_country = st.selectbox('Choose a country',country)
         choose_vol_type = st.selectbox('Choose a Volcano Type',primary_volcano_type)
@@ -88,6 +94,7 @@ def main():
         else:
             st.table(df[(df["Country"] ==choose_country) & (df["Primary Volcano Type"] ==choose_vol_type)].sort_values("Volcano Name",ascending=False))
     elif selector=="Charts":
+        st.write(time)
         st.title("Compare the amount of volcano eruptions in 5 Countries using bar chart,pie chart")
         choose_country_1 = st.selectbox('Choose a country',country)
         choose_country_2 = st.selectbox('Choose a second country',country)
@@ -123,6 +130,7 @@ def main():
         plt.pie(country_count, labels=[choose_country_1,choose_country_2,choose_country_3,choose_country_4,choose_country_5], autopct="%1.2f%%")
         st.pyplot(fig)
     elif selector=="Maps & Scatter Plot of Volcanoes":
+        st.write(time)
         st.title("Maps of Volcanoes in the selected Country")
         choose_country = st.selectbox('Choose a country',country)
         volcano_name_list=[]
