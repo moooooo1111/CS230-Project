@@ -7,7 +7,6 @@ I have not copied the code from a student or any source.
 I have not given my code to any student.
 """
 VOLCANOES = "volcanoes.csv"
-pip install matplotlib
 import pandas as pd
 import matplotlib.pyplot as plt
 import streamlit as st
